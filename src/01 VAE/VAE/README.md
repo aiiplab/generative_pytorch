@@ -27,7 +27,7 @@ updating...
 - 그러나 정규분포는 무작위 연산이기 때문에 **비미분 가능(discrete)** 연산으로 **역전파(backpropagation)**가 안됨!
 
 ### Reparameterization Trick
-![reparameterization](/assets/vae_sampling.png)
+![reparameterization](/assets/VAE/reparameterization.png)
 - 이 트릭은 Sampling을 미분 가능한 연산으로 바꿔줌
 - VAE의 인코더는 평균($\mu$)과 분산($\sigma^2$)를 출력하며 이들은 학습이 가능함
 - $\epsilon$은 표준 정규분포에서 샘플링된 노이즈
