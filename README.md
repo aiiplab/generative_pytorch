@@ -4,4 +4,3 @@
 **The educational materials are organized so that they can be acquired in the order of Beginner, Intermediate, and Advanced levels.**
 ![order](assets/order.png)
 ## Summary
-![contents](assets/contents.png)
