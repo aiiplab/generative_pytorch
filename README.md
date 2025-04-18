@@ -14,4 +14,4 @@
 - [GAN](https://www.youtube.com/watch?v=vZdEGcLU_8U)
 - [Diffusion](https://www.youtube.com/watch?v=jaPPALsUZo8&t=697s)
 ## Author
-Gyuseok Lee(https://github.com/gyuseok0917)
+[Gyuseok Lee](https://github.com/gyuseok0917)
