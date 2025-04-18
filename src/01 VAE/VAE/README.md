@@ -24,7 +24,7 @@ updating...
 
 ## Sampling
 - VAE는 latent vector $z$를 **정규 분포 $z\sim \mathcal{N}(\mu, \sigma^2)$**에서 샘플링
-- 그러나 정규분포는 무작위 연산이기 때문에 **비미분 가능(discrete)** 연산으로 **역전파(backpropagation)**가 안됨!
+- 그러나 정규분포는 무작위 연산이기 때문에 **비미분 가능(discrete)** 연산으로 역전파(backpropagation)가 안됨!
 
 ### Reparameterization Trick
 ![reparameterization](/assets/VAE/reparameterization.png)
