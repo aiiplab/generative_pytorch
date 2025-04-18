@@ -2,9 +2,9 @@
 ### 선문대 AIIP Lab의 교육자료입니다
 ## Introduction
 **The educational materials are organized so that they can be acquired in the order of Beginner, Intermediate, and Advanced levels.**
-![order](assets/order.png)
+![order](assets/main/order.png)
 ## Summary
-![contents](assets/contents.png)
+![contents](assets/main/contents.png)
 ## Method
 - Each generative model is provided in the form of a **python script(.py)** or **notebook(.ipynb)**.
 - Each model folder has a Markdown with a description.
