@@ -62,7 +62,8 @@ class BaseVAE(nn.Module):
     
     def decode(self, z):
         out = self.decoder(z)
-        out = out.view(-1, 1, 28, 28)
+        out = out.view(-1, 1, 28, 28) # [B, (C, H, W)] -> [B, C, H, W]
+        out = torch.sigmoid(out) # value to [0, 1]
         return out
     
     def forward(self, x):
@@ -115,7 +116,7 @@ class ConvolutionVAE(nn.Module):
         z = self.decoder_input(z)
         z = z.view(-1, 64, 7, 7)
         out = self.decoder(z)
-        out = torch.sigmoid(out)
+        out = torch.sigmoid(out) # value to [0, 1]
         return out
 
     def forward(self, x):

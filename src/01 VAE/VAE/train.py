@@ -106,6 +106,7 @@ if __name__ == "__main__":
         _ = train_epoch(model,
                         train_loader,
                         loss_function,
+                        optimizer,
                         epoch,
                         args.device)
         test_avg_loss = test_epoch(model,
