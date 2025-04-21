@@ -12,6 +12,6 @@
 ## Lecture Video (KR)
 - [VAE](https://www.youtube.com/watch?v=aWrm_CUBPLk)
 - [GAN](https://www.youtube.com/watch?v=vZdEGcLU_8U)
-- [Diffusion](https://www.youtube.com/watch?v=jaPPALsUZo8&t=697s)
+- [Diffusion](https://www.youtube.com/watch?v=Q_o0SpXv9kU)
 ## Author
 [Gyuseok Lee](https://github.com/gyuseok0917)
