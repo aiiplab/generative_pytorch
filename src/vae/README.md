@@ -59,7 +59,8 @@ python src/vae/train.py --device="cpu"
 ```
 
 ### 3. notebook
-practice.ipynb is available at [](https://drive.google.com/file/d/1BoCJsT4aGrri1XrraKge_7_hZ8JpXUpS/view?usp=sharing)
+practice.ipynb is available at [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/aiiplab/generative_pytorch/blob/main/src/vae/pratice.ipynb)
+
 
 
 ## Reference
