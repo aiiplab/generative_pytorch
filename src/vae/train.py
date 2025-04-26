@@ -33,7 +33,7 @@ def parser_argument():
 
 def train_epoch(model, dataloader, criterion, optimizer, epoch, device):
     model.train()  
-    total = 0
+    total_samples = 0
     total_loss = 0.
 
     for batch_idx, (data, _) in enumerate(dataloader):
@@ -47,19 +47,19 @@ def train_epoch(model, dataloader, criterion, optimizer, epoch, device):
         optimizer.step()
 
         total_loss += loss.item()
-        total += batch_size
+        total_samples += batch_size
 
         if batch_idx % 100 == 0:
-            print(f"[Train] Epoch {epoch} [{total:>5d}/{len(dataloader.dataset)}]\tAvg Loss: {total_loss/total:.3f}")
+            print(f"[Train] Epoch {epoch} [{total_samples:>5d}/{len(dataloader.dataset)}]\tAvg Loss: {total_loss/total_samples:.3f}")
 
-    total_loss /= len(dataloader.dataset)
+    total_loss /= total_samples
     return total_loss
 
 
 @torch.no_grad()
 def test_epoch(model, dataloader, criterion, epoch, device):
     model.eval()
-    total = 0
+    total_samples = 0
     total_loss = 0.
 
     pbar = tqdm(dataloader, desc = f"[Test]  Epoch {epoch}")
@@ -72,11 +72,11 @@ def test_epoch(model, dataloader, criterion, epoch, device):
         loss = criterion(recon_data, data, mu, logvar)
 
         total_loss += loss.item()
-        total += batch_size
+        total_samples += batch_size
 
-        pbar.set_postfix(avg_loss=f"{total_loss/total:.3f}")
+        pbar.set_postfix(avg_loss=f"{total_loss/total_samples:.3f}")
 
-    total_loss /= len(dataloader.dataset)
+    total_loss /= total_samples
     return total_loss
 
 
