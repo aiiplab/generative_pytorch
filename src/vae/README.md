@@ -36,6 +36,32 @@ and the standard normal distribution $p(z)=\mathcal{N}(0,1)$
 - $\epsilon$ is a noise vector sampled from a standard normal distribution
 - Transform the sampling process from probabilistic to deterministic by controlling the $z$ to be sampled through learnable mean and variance
 
+## Using code
+### 1. root
+```
+root
+├─ src
+│  └─ vae
+│     ├─ model.py
+│     ├─ loss.py
+│     ├─ train.py
+│     ├─ practice.ipynb
+│     └─ README.md
+```
+
+### 2. train script 
+```
+python src/vae/train.py 
+```
+If you use CPU:
+```
+python src/vae/train.py --device="cpu"
+```
+
+### 3. notebook
+practice.ipynb is available at [](https://drive.google.com/file/d/1BoCJsT4aGrri1XrraKge_7_hZ8JpXUpS/view?usp=sharing)
+
+
 ## Reference
 - Kingma, Diederik P., and Max Welling. "Auto-encoding variational bayes." 20 Dec. 2013
 - https://kyujinpy.tistory.com/88
