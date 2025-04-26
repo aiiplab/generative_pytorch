@@ -59,9 +59,7 @@ python src/vae/train.py --device="cpu"
 ```
 
 ### 3. notebook
-practice.ipynb is available at [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github.com/aiiplab/generative_pytorch/blob/main/src/vae/pratice.ipynb)
-
-
+practice.ipynb is available at [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aiiplab/generative_pytorch/blob/main/src/vae/pratice.ipynb)
 
 ## Reference
 - Kingma, Diederik P., and Max Welling. "Auto-encoding variational bayes." 20 Dec. 2013
