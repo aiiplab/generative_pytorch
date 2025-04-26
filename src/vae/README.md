@@ -42,10 +42,10 @@ and the standard normal distribution $p(z)=\mathcal{N}(0,1)$
 root
 ├─ src
 │  └─ vae
-│     ├─ model.py
-│     ├─ loss.py
-│     ├─ train.py
-│     ├─ practice.ipynb
+│     ├─ model.py         # VAE's mode code
+│     ├─ loss.py          # VAE's loss function code
+│     ├─ train.py         # VAE's training code
+│     ├─ practice.ipynb   # VAE's tutorial notebook
 │     └─ README.md
 ```
 
