@@ -29,6 +29,7 @@ and **reverse process** that removes this noise in reverse to restore the origin
 
 ### Method
 #### Model Architecture
+![diffusion_unet](/assets/Diffusion/diffusion_unet.png)
 
 - The model uses the [U-Net](https://arxiv.org/abs/1505.04597) architecture
 - Consists of ```Residual Blocks```, ```Attention Layers```, and ```Skip Connections```
