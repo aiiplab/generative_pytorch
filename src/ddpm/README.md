@@ -8,6 +8,9 @@
 ## Diffusion Models
 ### Introduction
 ![diffusion main](/assets/Diffusion/diffusion_main.png)
+<img src="/assets/Diffusion/diffusion_image.gif" style="float: left; width:300px; margin-right:20px;">
+<img src="/assets/Diffusion/diffusion_distribution.gif" style="float: left; width:300px; margin-right:20px;">
+<img src="/assets/Diffusion/diffusion_sample.gif" style="float: left; width:300px; margin-right:20px;">
 
 **Diffusion Model** is a generative model that learns **forward process** that gradually covers data with Gaussian noise,
 and **reverse process** that removes this noise in reverse to restore the original.
