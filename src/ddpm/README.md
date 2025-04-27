@@ -22,22 +22,21 @@ and **reverse process** that removes this noise in reverse to restore the origin
 ### Reverse Process
 ![diffusion_reverse](/assets/Diffusion/diffusion_reverse.png)
 
+- $p(x_t)=\mathcal{N}(x_T;0,\text{I})$
+- $p_\theta(x_{t-1}|x_t)=\mathcal{N}(x_{t-1};\mu_\theta(x_t,t), \sigma^2\text{I})$
+- Fix the variance of the data distribution of the reverse process and **predict the mean of the data distribution at each step**
 
-## Method
-### AutoEncoder
-updating...
-![ae](/assets/VAE/ae.png)
 
-- AutoEncoder consists of an **Encoder that compresses input data and Decoder that expands and restores it**
-- However, autoencoders cannot generate **because they do not represent the latent space as a probability distribution**
-- [Reference](https://medium.com/data-science/difference-between-autoencoder-ae-and-variational-autoencoder-vae-ed7be1c038f2)
+### Method
+#### Model Architecture
+![diffusion_unet](/assets/Diffusion/diffusion_unet.png)
 
-### Variational AutoEncoder(VAE)
-![vae](/assets/VAE/vae.png)
+- The model uses the [U-Net](https://arxiv.org/abs/1505.04597) architecture
+- Consists of ```Residual Blocks```, ```Attention Layers```, and ```Skip Connections```
+- Embed timestep $t$ and apply element-wise sum to the input of each block
+- Model takes $x_t$ as input and predicts the noise $\mu_\theta(x_t, t)$ that was added to $x_t$.
 
-- VAE allows **the encoder of AutoEncoder to represent the latent space as a probability distribution**
-- VAE can express the latent space as a probability distribution, so **it can generate new data
-through the decoder from any $z\sim \mathcal{N}(0,I)$ sample**
+
 
 ### Loss function
 ![loss](/assets/VAE/loss.png)
