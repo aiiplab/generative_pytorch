@@ -379,7 +379,7 @@ class GaussianDiffusion:
         # start from pure noise (for each example in the batch)
         img = torch.randn(shape, device=device)  # x_T ~ N(0, 1)
         imgs = []
-        for i in tqdm(reversed(range(0, self.timesteps)), desc="sampling loop time step", total=self.timesteps):
+        for i in tqdm(reversed(range(0, self.timesteps)), desc="sampling loop time step", total=self.timesteps, ascii=" >"):
             t = torch.full((batch_size,), i, device=device, dtype=torch.long)
             img = self.p_sample(model, img, t)
             imgs.append(img.cpu().numpy())
@@ -415,39 +415,49 @@ class Trainer:
         self.device = device
         self.rank = rank
         self.world_size = world_size
-
         self.model = model.to(device)
-        self.ddp_model = DDP(self.model, device_ids=[rank], output_device=rank)
+        if self.rank is not None:
+            self.ddp_model = DDP(self.model, device_ids=[self.rank], output_device=self.rank)
+        else:
+            self.ddp_model = self.model
         self.diffusion = diffusion
         self.dataloader = dataloader
         self.optimizer = optimizer
         self.device
         self.save_dir = save_dir
-        if self.rank == 0:
+        if self.rank is None or self.rank == 0:
             os.makedirs(save_dir, exist_ok=True)
 
     def train(self, epochs):
         self.ddp_model.train()
         for epoch in range(1, epochs+1):
-            self.dataloader.sampler.set_epoch(epoch)
-            if self.rank == 0:
-                pbar = tqdm(self.dataloader, desc=f"Epoch {epoch}/{epochs}")
+            if hasattr(self.dataloader.sampler, "set_epoch"):
+                self.dataloader.sampler.set_epoch(epoch)
+            
+            if self.rank is None or self.rank == 0:
+                pbar = tqdm(self.dataloader, desc=f"[Train] Epoch {epoch}/{epochs}", ascii=" >")
             else:
                 pbar = self.dataloader
 
-            for images, _ in pbar:
+            total_loss = 0.
+
+            for batch_idx, (images, _) in enumerate(pbar):
                 images = images.to(self.device)
                 t = torch.randint(0, self.diffusion.timesteps, (images.size(0),), device=self.device).long()
-                loss = self.diffusion.train_losses(self.ddp_model, images, t)
-
+                
                 self.optimizer.zero_grad()
+                loss = self.diffusion.train_losses(self.ddp_model, images, t)
                 loss.backward()
                 self.optimizer.step()
 
-                if self.rank == 0:
-                    pbar.set_postfix(loss=loss.item())
+                total_loss += loss.item()
+
+                if self.rank is None or self.rank == 0:
+                    pbar.set_postfix(
+                        batch_loss=f"{loss.item():.3f}",
+                        avg_loss = f"{total_loss/(batch_idx+1):.3f}")
             
-            if self.rank == 0:
+            if self.rank is None or self.rank == 0:
                 self.sample_and_save(epoch)
                 self.save_checkpoint(epoch)
 

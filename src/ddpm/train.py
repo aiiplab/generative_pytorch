@@ -1,8 +1,6 @@
 import os
-import random
 import argparse
 
-import numpy as np
 import torch
 import torch.optim as optim
 import torch.distributed as dist
@@ -11,7 +9,8 @@ import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 from torch.utils.data.distributed import DistributedSampler
 from torchvision.datasets import MNIST
-from ddpm import UNetModel, GaussianDiffusion, Trainer
+from distributed import *
+from model import UNetModel, GaussianDiffusion, Trainer
 
 def parser_argument():
     parser = argparse.ArgumentParser()
@@ -34,45 +33,33 @@ def parser_argument():
     parser.add_argument("--beta_schedule", type=str, default="linear")
     args = parser.parse_args()
     return args
-
-
-def setup(rank):
-    dist.init_process_group(backend="nccl")
-    rank = dist.get_rank()
-    torch.cuda.set_device(rank)
-
-
-def cleanup():
-    dist.destroy_process_group()
-
-
-def set_seed(seed: int = 42):
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)  # if using multi-GPU
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
     
     
-def download_dataset(rank):
-    if rank == 0:
-        print("[Rank 0] Downloading MNIST...")
-        transforms_ = transforms.Compose([transforms.ToTensor()])
-        MNIST(root="./data", train=True, transform=transforms_, download=True)
-        MNIST(root="./data", train=False, transform=transforms_, download=True)
-    dist.barrier()
+def download_dataset():
+    transforms_ = transforms.Compose([transforms.ToTensor()])
+    MNIST(root="./data", train=True, transform=transforms_, download=True)
+    MNIST(root="./data", train=False, transform=transforms_, download=True)
 
 
 def main(args):
-    rank = int(os.environ["RANK"])
-    world_size = int(os.environ["WORLD_SIZE"])
-    local_rank = int(os.environ["LOCAL_RANK"])
-    
-    setup(local_rank)
+    distributed = "WORLD_SIZE" in os.environ and int(os.environ["WORLD_SIZE"]) > 1
+
+    if distributed:
+        rank = int(os.environ["RANK"])
+        world_size = int(os.environ["WORLD_SIZE"])
+        local_rank = int(os.environ["LOCAL_RANK"])
+        setup_for_distributed(local_rank)
+    else:
+        rank = 0
+        world_size = 1
+        local_rank = 0
     set_seed(args.seed + rank)
-    
-    download_dataset(rank)
+
+    if rank == 0:
+        print("Downloading Dataset...")
+        download_dataset()
+    if distributed:
+        dist.barrier()
 
     transform = transforms.Compose([
         transforms.ToTensor(),
@@ -80,13 +67,18 @@ def main(args):
     ])
         
     dataset = MNIST(root = "./data", train=True, transform=transform, download=False)
-    sampler = DistributedSampler(dataset, num_replicas=world_size, rank=rank)
+    if distributed:
+        sampler = DistributedSampler(dataset, num_replicas=world_size, rank=rank)
+    else:
+        sampler = None
     dataloader = DataLoader(dataset,
                             batch_size=args.batch_size,
                             sampler=sampler,
+                            shuffle = (sampler is None),
                             num_workers=4,
                             pin_memory=True,
-                            persistent_workers=True)
+                            persistent_workers=True,
+                            drop_last = (sampler is not None))
 
     model = UNetModel(in_channels=args.in_channels,
                       model_channels=args.model_channels,
@@ -100,13 +92,14 @@ def main(args):
                       diffusion,
                       dataloader,
                       optimizer,
-                      rank,
-                      world_size,
+                      rank if distributed else None,
+                      world_size if distributed else None,
                       device=args.device,
                       save_dir=args.save_dir)
     trainer.train(epochs=args.epochs)
 
-    cleanup()
+    if distributed:
+        cleanup()
 
 
 if __name__ == "__main__":
