@@ -32,8 +32,7 @@ and **reverse process** that removes this noise in reverse to reconstruct the or
 - Fix the variance of the data distribution of the reverse process and **predict the mean of the data distribution at each step**
 
 
-## Method
-### Model Architecture
+## Model Architecture
 ![diffusion_unet](/assets/Diffusion/diffusion_unet.png)
 
 - The model uses the [U-Net](https://arxiv.org/abs/1505.04597) architecture
@@ -41,11 +40,11 @@ and **reverse process** that removes this noise in reverse to reconstruct the or
 - Embed timestep $t$ and apply element-wise sum to the input of each block
 - Model takes $x_t$ as input and predicts the noise $\mu_\theta(x_t, t)$ that was added to $x_t$.
 
-### Training
+## Training
 
+## Sampling
 ### DDPM Sampling
 
-### DDIM Sampling
 
 ## Using code
 ### 1. root
