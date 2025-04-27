@@ -62,20 +62,20 @@ root
 ```
 
 ### 2. train script
-- If you train using only one GPU
+- if you use 1 GPU
 ```
 CUDA_VISIBLE_DEVICES=0 python src/diffusion/train.py --batch_size=128 --epochs=30
 ```
-- If you use distributed learning
+- If you use multi GPU
 ```
 torchrun --nproc_per_node=2 python src/diffusion/train.py --batch_size=128 --epochs=30
 ``` 
 
 ### 3. notebook
-practice.ipynb is available at [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aiiplab/generative_pytorch/blob/main/src/ddpm/pratice.ipynb)
+practice.ipynb is available at [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aiiplab/generative_pytorch/blob/main/src/diffusion/pratice.ipynb)
 
 ## Reference
-- Ho et al. "Denoising diffusion probabilistic models", NeurIPS 2020
-- Song et al. "Denoising diffusion implicit models", arXiv preprint 2020
-- Song et al. "Score-Based Generative Modeling through Stochastic Differential Equations", ICLR 2021
-- Ho et al. "Classifier-Free Diffusion Guidance", NeurIPS 2022
+- Ho et al. [Denoising diffusion probabilistic models](https://arxiv.org/abs/2006.11239) NeurIPS 2020
+- Song et al. [Denoising diffusion implicit models](https://arxiv.org/abs/2010.02502) arXiv preprint 2020
+- Song et al. [Score-Based Generative Modeling through Stochastic Differential Equations](https://arxiv.org/abs/2011.13456) ICLR 2021
+- Ho et al. [Classifier-Free Diffusion Guidance](https://arxiv.org/abs/2207.12598) NeurIPS 2022
