@@ -40,13 +40,12 @@ and **reverse process** that removes this noise in reverse to reconstruct the or
 - Embed timestep $t$ and apply element-wise sum to the input of each block
 - Model takes $x_t$ as input and predicts the noise $\mu_\theta(x_t, t)$ that was added to $x_t$.
 
-## Training
+## DDPM
 
-## Sampling
+### Training
 
-### DDPM
-### DDIM
-### SGD
+
+### Sampling
 
 ## Using code
 ### 1. root
