@@ -8,10 +8,10 @@
 ## Diffusion Models
 ### Introduction
 ![diffusion main](/assets/Diffusion/diffusion_main.png)
-<p style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-  <img src="/assets/Diffusion/diffusion_image.gif" width="250">
-  <img src="/assets/Diffusion/diffusion_distribution.gif" width="250">
-  <img src="/assets/Diffusion/diffusion_sample.gif" width="250">
+<p style="display: flex; justify-content: center; align-items: center; gap: 300px;">
+  <img src="/assets/Diffusion/diffusion_image.gif" width="300">
+  <img src="/assets/Diffusion/diffusion_distribution.gif" width="300">
+  <img src="/assets/Diffusion/diffusion_sample.gif" width="300">
 </p>
 
 **Diffusion Model** is a generative model that learns **forward process** that gradually covers data with Gaussian noise,
