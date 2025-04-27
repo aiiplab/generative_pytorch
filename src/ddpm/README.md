@@ -5,15 +5,23 @@
 2) ```DDIM (Denoising Diffusion Implicit Models)```
 3) ```CFG(Classifier-Free Diffusion Guidance)```
 
-## DDPM
+## Diffusion Models
 ### Introduction
+![diffusion main](/assets/Diffusion/diffusion_main.png)
 
-**DDPM(Denoising Diffusion Probabilistic Models)** is a generative model that learns **forward process** that gradually covers data with Gaussian noise,
+**Diffusion Model** is a generative model that learns **forward process** that gradually covers data with Gaussian noise,
 and **reverse process** that removes this noise in reverse to restore the original.
 
-## Introduction
-**VAE(Variational AutoEncoder)** is a generative model that extends AutoEncoder **to probabilistically encode input data</br>
-into latent space** and restore data from the encoded latent vector
+### Forward Process
+![diffusion forward](/assets/Diffusion/diffusion_forward.png)
+
+- $q(x_t|x_{t-1})=\mathcal{N}(x_t;\sqrt{1-\beta_t}x_{t-1}, \beta_t\text{I})$ $\longrightarrow$ $q(x_{1:T}|x_0)=\prod_{t=1}^T q(x_t|x_{t-1})$
+- The given image now follows a probability distribution with mean $\sqrt{1-\beta_t}x_{t-1}$ and variance $\beta_t \text{I}$ after 1 step.
+- The process of adding noise while reducing the proportion of signal in the data.
+
+### Reverse Process
+![diffusion_reverse](/assets/Diffusion/diffusion_reverse.png)
+
 
 ## Method
 ### AutoEncoder
