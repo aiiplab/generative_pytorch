@@ -14,8 +14,8 @@
   <img src="/assets/Diffusion/diffusion_sample.gif" width="300">
 </p>
 
-**Diffusion Model** is a generative model that learns **forward process** that gradually covers data with Gaussian noise,
-and **reverse process** that removes this noise in reverse to restore the original.
+**Diffusion Model** is generative model that learns **forward process** that gradually covers data with Gaussian noise,
+and **reverse process** that removes this noise in reverse to reconstruct the original.
 
 ### Forward Process
 ![diffusion forward](/assets/Diffusion/diffusion_forward.png)
