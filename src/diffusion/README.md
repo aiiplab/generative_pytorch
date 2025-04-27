@@ -4,7 +4,7 @@
 1) ```DDPM(Denoising Diffusion Probabilistic Models)```
 2) ```DDIM (Denoising Diffusion Implicit Models)```
 3) ```Score-SDE (Score-based Generative Models)```
-4) ```CFG(Classifier-Free Diffusion Guidance)```
+4) ```CFG (Classifier-Free Diffusion Guidance)```
 
 ## Introduction
 ![diffusion main](/assets/Diffusion/diffusion_main.png)
