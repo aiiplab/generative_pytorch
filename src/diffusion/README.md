@@ -14,7 +14,7 @@
   <img src="/assets/Diffusion/diffusion_sample.gif" width="300">
 </p>
 
-**Diffusion Model** is generative model that learns **forward process** that gradually covers data with Gaussian noise,
+**Diffusion Model** is generative model that learns **forward process** that gradually covers data with Gaussian noise,</br>
 and **reverse process** that removes this noise in reverse to reconstruct the original.
 
 ## Forward Process
@@ -40,14 +40,33 @@ and **reverse process** that removes this noise in reverse to reconstruct the or
 - Embed timestep $t$ and apply element-wise sum to the input of each block
 - Model takes $x_t$ as input and predicts the noise $\mu_\theta(x_t, t)$ that was added to $x_t$.
 
-## DDPM
-
+## DDPM(Denoising Diffusion Probabilistic Models)
 ### Training
+![ddpm_training](/assets/Diffusion/ddpm_training.png)
 
+- Add noise $\epsilon$ to input data $x_0$ and transform it into $x_t$
+- U-Net takes $x_t$ as input and **predicts noise $\epsilon_\theta(x_t, t)$**
 
 ### Sampling
+![ddpm_sampling](/assets/Diffusion/ddpm_sampling.png)
+
+- Starting from Gaussian Noise x_T, **predict noise $\epsilon_\theta$ for each Timestep**.
+- **Generate $x_{t-1}$ of the previous step** according to the Sampling Algorithm.
+- At this time, noise $z$ is added according to the variance $\sigma_t^2=\beta_t$ during the prediction process.
+  - Denoising Flow **Deterministic** $\rightarrow$ **Stochastic**
+
+## DDIM(Denoising diffusion implicit models)
+updaining...
+
+## SGD(Score-Based Generative Models)
+updaining...
+
+## CFG(Classifier-Free Diffusion Guidance)
+updaining...
 
 ## Using code
+Currently only DDPM is implemented...
+
 ### 1. root
 ```
 root
@@ -71,7 +90,7 @@ torchrun --nproc_per_node=2 python src/diffusion/train.py --batch_size=128 --epo
 ``` 
 
 ### 3. notebook
-practice.ipynb is available at [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aiiplab/generative_pytorch/blob/main/src/diffusion/pratice.ipynb)
+```practice.ipynb``` is available at [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aiiplab/generative_pytorch/blob/main/src/diffusion/pratice.ipynb)
 
 ## Reference
 - Ho et al. [Denoising diffusion probabilistic models](https://arxiv.org/abs/2006.11239) NeurIPS 2020
