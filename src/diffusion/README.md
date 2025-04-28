@@ -90,7 +90,7 @@ torchrun --nproc_per_node=2 python src/diffusion/train.py --batch_size=128 --epo
 ```
 
 ### 3. notebook
-```practice.ipynb``` is available at [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github.com/aiiplab/generative_pytorch/blob/main/src/diffusion/practice.ipynb)
+```practice.ipynb``` is available at [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aiiplab/generative_pytorch/blob/main/src/diffusion/practice.ipynb)
 
 ## Reference
 - Ho et al. [Denoising diffusion probabilistic models](https://arxiv.org/abs/2006.11239) NeurIPS 2020
