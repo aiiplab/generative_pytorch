@@ -86,7 +86,7 @@ CUDA_VISIBLE_DEVICES=0 python src/diffusion/train.py --batch_size=128 --epochs=3
 ```
 - If you use multi GPU
 ```
-torchrun --nproc_per_node=2 python src/diffusion/train.py --batch_size=128 --epochs=30
+torchrun --nproc_per_node=2 src/diffusion/train.py --batch_size=128 --epochs=30
 ```
 
 ### 3. notebook
