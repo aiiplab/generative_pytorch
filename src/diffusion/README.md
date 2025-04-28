@@ -8,7 +8,7 @@
 
 ## Introduction
 ![diffusion main](/assets/Diffusion/diffusion_main.png)
-<p style="display: flex; justify-content: center; align-items: center; gap: 300px;">
+<p style="display: flex; justify-content: center; align-items: center; gap: 300;">
   <img src="/assets/Diffusion/diffusion_image.gif" width="300">
   <img src="/assets/Diffusion/diffusion_distribution.gif" width="300">
   <img src="/assets/Diffusion/diffusion_sample.gif" width="300">
