@@ -8,6 +8,11 @@
 
 ## Introduction
 ![diffusion main](/assets/Diffusion/diffusion_main.png)
+<p style="display: flex; justify-content: center; align-items: center; gap: 300;">
+  <img src="/assets/Diffusion/diffusion_image.gif" width="300">
+  <img src="/assets/Diffusion/diffusion_distribution.gif" width="300">
+  <img src="/assets/Diffusion/diffusion_sample.gif" width="300">
+</p>
 
 **Diffusion Model** is generative model that learns **forward process** that gradually covers data with Gaussian noise,</br>
 and **reverse process** that removes this noise in reverse to reconstruct the original.
